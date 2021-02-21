@@ -1,0 +1,16 @@
+import './App.css';
+
+class App() {
+
+  render (){
+    return (
+    <div className='App'>
+      <h2>HELLO AGAIN!</h2>
+    </div>
+  );
+
+  }
+  
+}
+
+export default App;
