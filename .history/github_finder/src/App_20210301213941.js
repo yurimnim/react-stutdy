@@ -12,9 +12,10 @@ import "./App.css";
 import GithubState from "./context/github/GithubState";
 
 const App = () => {
+  const [users, setUsers] = useState([]);
+  const [user, setUser] = useState({});
   const [repo, setRepo] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [users, setUsers] = useState([]);
   const [alert, setAlert] = useState(null);
 
   //TODO: 복습
@@ -30,6 +31,19 @@ const App = () => {
   //   this.setState({ users: res.data, loading: false });
   // }
 
+  //***GET SINGLE GITHUB USER*/
+  const getUser = async username => {
+    setLoading(true);
+    const res = await axios.get(
+      `https://api.github.com/users/${username}?client_id=$
+      {process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secrets=$
+      {REACT_APP_GITHUB_CLIENT_SECRET}`
+    );
+
+    setUser(res.data);
+    setLoading(false);
+  };
+
   //***GET USERS REPOS */
   const getUserRepos = async username => {
     setLoading(true);
@@ -40,6 +54,12 @@ const App = () => {
     );
 
     setRepo(res.data);
+    setLoading(false);
+  };
+
+  //***CLEAR GITHUB USERS FROM STATE***
+  const clearUsers = () => {
+    setUsers([]);
     setLoading(false);
   };
 
@@ -62,7 +82,11 @@ const App = () => {
                 path="/"
                 render={props => (
                   <Fragment>
-                    <Search setAlert={showAlert} />
+                    <Search
+                      clearUsers={clearUsers}
+                      showClear={users.length > 0 ? true : false}
+                      setAlert={showAlert}
+                    />
                     <Users loading={loading} users={users} />
                   </Fragment>
                 )}
@@ -72,7 +96,14 @@ const App = () => {
                 exact
                 path="/user/:login"
                 render={props => (
-                  <User {...props} getUserRepos={getUserRepos} repos={repo} />
+                  <User
+                    {...props}
+                    getUser={getUser}
+                    getUserRepos={getUserRepos}
+                    user={user}
+                    repos={repo}
+                    loading={loading}
+                  />
                 )}
               />
             </Switch>

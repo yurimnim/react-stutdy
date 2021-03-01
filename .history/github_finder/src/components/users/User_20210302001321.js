@@ -6,14 +6,14 @@ import { Link } from "react-router-dom";
 import GithubContext from "../../context/github/githubContext";
 
 const User = ({ repos, getUserRepos, match }) => {
-  const githubContext = useContext(GithubContext);
-  const { getUser, loading, user } = githubContext;
-
   useEffect(() => {
     getUser(match.params.login);
     getUserRepos(match.params.login);
     //eslint-disable-next-line
   }, []);
+
+  const githubContext = useContext(GithubContext);
+  const { getUser, loading, user } = githubContext;
 
   const {
     name,
@@ -116,7 +116,10 @@ const User = ({ repos, getUserRepos, match }) => {
 };
 
 User.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  user: PropTypes.object.isRequired,
   repos: PropTypes.array.isRequired,
+  getUser: PropTypes.func.isRequired,
   getUserRepos: PropTypes.func.isRequired
 };
 

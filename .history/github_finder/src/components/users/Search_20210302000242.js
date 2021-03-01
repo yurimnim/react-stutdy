@@ -52,6 +52,7 @@ const Search = ({ setAlert }) => {
 };
 
 Search.propTypes = {
+  showClear: PropTypes.bool.isRequired,
   setAlert: PropTypes.func.isRequired
 };
 

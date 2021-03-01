@@ -13,8 +13,6 @@ import GithubState from "./context/github/GithubState";
 
 const App = () => {
   const [repo, setRepo] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [users, setUsers] = useState([]);
   const [alert, setAlert] = useState(null);
 
   //TODO: 복습
