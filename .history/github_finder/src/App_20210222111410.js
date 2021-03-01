@@ -31,7 +31,7 @@ const App = () => {
 
   //***SEARCH GITHUB USERS***
   const searchUsers = async text => {
-    //console.log(process.env.REACT_APP_GITHUB_CLIENT_ID);
+    console.log(process.env.REACT_APP_GITHUB_CLIENT_ID);
     setLoading(true);
 
     const res = await axios.get(
@@ -40,7 +40,7 @@ const App = () => {
       {REACT_APP_GITHUB_CLIENT_SECRET}`
     );
 
-    setUsers(res.data.items);
+    setUsers(res.data);
     setLoading(false);
   };
 
@@ -111,8 +111,8 @@ const App = () => {
               render={props => (
                 <User
                   {...props}
-                  getUser={getUser}
-                  getUserRepos={getUserRepos}
+                  getUser={this.getUser}
+                  getUserRepos={this.getUserRepos}
                   user={user}
                   repos={repo}
                   loading={loading}

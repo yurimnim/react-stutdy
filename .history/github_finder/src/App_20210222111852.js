@@ -40,7 +40,7 @@ const App = () => {
       {REACT_APP_GITHUB_CLIENT_SECRET}`
     );
 
-    setUsers(res.data.items);
+    setUsers(res.data);
     setLoading(false);
   };
 

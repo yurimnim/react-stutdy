@@ -8,8 +8,7 @@ const User = ({ user, loading, getUser, repos, getUserRepos, match }) => {
   useEffect(() => {
     getUser(match.params.login);
     getUserRepos(match.params.login);
-    //eslint-disable-next-line
-  }, []);
+  });
 
   const {
     name,
@@ -111,7 +110,7 @@ const User = ({ user, loading, getUser, repos, getUserRepos, match }) => {
   );
 };
 
-User.propTypes = {
+User.proptypes = {
   loading: PropTypes.bool.isRequired,
   user: PropTypes.object.isRequired,
   repos: PropTypes.array.isRequired,

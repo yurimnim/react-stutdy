@@ -4,12 +4,11 @@ import Repos from '../repos/Repo';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-const User = ({ user, loading, getUser, repos, getUserRepos, match }) => {
+const User = ({ user, loading, getUser, getRepos, getUserRepos, match }) => {
   useEffect(() => {
     getUser(match.params.login);
     getUserRepos(match.params.login);
-    //eslint-disable-next-line
-  }, []);
+  });
 
   const {
     name,
@@ -111,7 +110,7 @@ const User = ({ user, loading, getUser, repos, getUserRepos, match }) => {
   );
 };
 
-User.propTypes = {
+User.proptypes = {
   loading: PropTypes.bool.isRequired,
   user: PropTypes.object.isRequired,
   repos: PropTypes.array.isRequired,
